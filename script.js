@@ -1,5 +1,12 @@
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = true;
+
+const playerImage = new Image();
+playerImage.src = 'player-photo.png';
+playerImage.onload = () => render();
+playerImage.onerror = () => console.warn('Player photo failed to load:', playerImage.src);
+
 const statusEl = document.getElementById('status');
 const resetButton = document.getElementById('reset');
 const nextButton = document.getElementById('nextLevel');
@@ -224,26 +231,40 @@ function render() {
       }
 
       if (tile === TILE.player || tile === TILE.playerOnGoal) {
-        ctx.fillStyle = '#f6f7fb';
-        ctx.beginPath();
-        ctx.arc(
-          x * TILE_SIZE + TILE_SIZE / 2,
-          y * TILE_SIZE + TILE_SIZE / 2 - 6,
-          TILE_SIZE * 0.18,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
-        ctx.fillStyle = '#f8f9ff';
-        ctx.beginPath();
-        ctx.roundRect(
-          x * TILE_SIZE + TILE_SIZE * 0.28,
-          y * TILE_SIZE + TILE_SIZE * 0.48,
-          TILE_SIZE * 0.44,
-          TILE_SIZE * 0.26,
-          6
-        );
-        ctx.fill();
+        const margin = TILE_SIZE * 0.08;
+        const drawX = x * TILE_SIZE + margin;
+        const drawY = y * TILE_SIZE + margin;
+        const drawSize = TILE_SIZE - margin * 2;
+
+        if (playerImage.complete && playerImage.naturalWidth) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.roundRect(drawX, drawY, drawSize, drawSize, 10);
+          ctx.clip();
+          ctx.drawImage(playerImage, drawX, drawY, drawSize, drawSize);
+          ctx.restore();
+        } else {
+          ctx.fillStyle = '#f6f7fb';
+          ctx.beginPath();
+          ctx.arc(
+            x * TILE_SIZE + TILE_SIZE / 2,
+            y * TILE_SIZE + TILE_SIZE / 2 - 6,
+            TILE_SIZE * 0.18,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
+          ctx.fillStyle = '#f8f9ff';
+          ctx.beginPath();
+          ctx.roundRect(
+            x * TILE_SIZE + TILE_SIZE * 0.28,
+            y * TILE_SIZE + TILE_SIZE * 0.48,
+            TILE_SIZE * 0.44,
+            TILE_SIZE * 0.26,
+            6
+          );
+          ctx.fill();
+        }
       }
     }
   }

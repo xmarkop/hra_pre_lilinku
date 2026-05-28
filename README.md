@@ -2,9 +2,9 @@
 
 Testovacia hra pre Lilinku
 
-## Sokoban-like game
+## Hra pre Lilinku
 
-A simple browser Sokoban clone built with HTML, CSS, and JavaScript.
+A simple browser Sokoban-inspired game built with HTML, CSS, and JavaScript.
 
 ### How to run
 
