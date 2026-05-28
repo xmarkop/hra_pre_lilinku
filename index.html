@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sokoban Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1>Sokoban</h1>
+      <p>Push all boxes onto the target squares. Use arrow keys or WASD.</p>
+      <div class="controls">
+        <button id="prevLevel">Previous Level</button>
+        <button id="reset">Reset</button>
+        <button id="nextLevel">Next Level</button>
+      </div>
+      <p id="status">Level 1 / 4</p>
+    </section>
+
+    <div class="game-panel">
+      <canvas id="game" width="640" height="640"></canvas>
+      <div class="instructions">
+        <h2>Instructions</h2>
+        <ul>
+          <li>Use <strong>arrow keys</strong> or <strong>WASD</strong> to move.</li>
+          <li>Push boxes onto <span class="goal-mark">goal tiles</span>.</li>
+          <li>Boxes can only be pushed, not pulled.</li>
+          <li>Clear the board to advance to the next level.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
